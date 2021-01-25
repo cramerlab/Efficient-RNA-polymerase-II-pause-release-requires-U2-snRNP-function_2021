@@ -11,7 +11,7 @@ We included in our analysis only major isoforms with 70% or higher prevalenve pe
 Major isoform annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
 In order to create the major isoforms annotation:
 ~/bash/salmon.sh
-~/Rscripts/major_isoform_selection.R
+~/R_scripts/major_isoform_selection.R
 
 Intronless genes annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
 In order to create the intronless genes annotatio:
@@ -19,7 +19,7 @@ In order to create the intronless genes annotatio:
 
 #### Splicing ratio calculation:
 1) Create Exon based spliced junction read count lists using bam files:
-~/exon_based_spliced_junction.R
+~/bash/exon_based_spliced_junction.R
 2) Calculate the splicing ratio and plot the results:
-~/splicing_ratio.R
+~/R_scripts/splicing_ratio.R
 
