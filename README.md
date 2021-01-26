@@ -10,8 +10,9 @@ TT-seq and RNA-seq reads aligned using STAR and filtered with Samtools. HTSeq  w
 We included in our analysis only major isoforms with 70% or higher prevalenve per gene in both DMSO and Pla-B.
 Major isoform annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
 In order to create the major isoforms annotation:
-~/bash/salmon.sh
-~/R_scripts/major_isoform_selection.R
+#Download 
+~/bash/salmon.sh. 
+~/R_scripts/major_isoform_selection.R. 
 
 Intronless genes annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
 In order to create the intronless genes annotatio:
