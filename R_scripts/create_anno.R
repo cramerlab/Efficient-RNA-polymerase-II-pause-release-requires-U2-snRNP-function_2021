@@ -41,8 +41,8 @@ ensembl.biomart.mapping=distinct(ensembl.biomart.mapping)
 #remove cases where the same transcript_id has two genes
 trs = ensembl.biomart.mapping %>% 
 group_by(transcript_id) %>% 
-summarise(n = n())
-trs=trs[which(trs$n >1),]
+summarise(count = n_distinct(gene_name))
+trs=trs[which(trs$count >1),]
 trs=trs$transcript_id
 ensembl.biomart.mapping=ensembl.biomart.mapping[which(ensembl.biomart.mapping$transcript_id %notin% trs),]
 
