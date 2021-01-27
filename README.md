@@ -9,10 +9,15 @@ TT-seq and RNA-seq reads aligned using STAR and filtered with Samtools. HTSeq  w
 #### Annotation:
 We included in our analysis only major isoforms with 70% or higher prevalenve per gene in both DMSO and Pla-B.
 Major isoform annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
-In order to create the major isoforms annotation:  
-#Download   
+In order to create the major isoforms annotation: 
+##### Create general annotation:
+Download ncbi Refseq hg38 genome assembly from https://genome.ucsc.edu/cgi-bin/hgTables   
+(clade: Mammal, genome: Human,  assembly: Dex.2013 GRCh38/h38, group: Gene and Gene Predictions, track: NCBI RefSeq, table: RefSeq Curated)   
+~/R_scripts/create_anno.R 
+~/R_scripts/create_extended.R 
+
+##### Create major isoform annotation
 ~/bash/salmon.sh  
-~/R_scripts/create_anno.R      
 ~/R_scripts/major_isoform_selection.R. 
 
 
