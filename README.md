@@ -13,7 +13,7 @@ In order to create the major isoforms annotation:
 ##### Create general annotation:
 Download ncbi Refseq hg38 genome assembly from https://genome.ucsc.edu/cgi-bin/hgTables   
 (clade: Mammal, genome: Human,  assembly: Dex.2013 GRCh38/h38, group: Gene and Gene Predictions, track: NCBI RefSeq, table: RefSeq Curated)   
-~/R_scripts/create_anno.R 
+~/R_scripts/create_anno.R   
 ~/R_scripts/create_extended.R 
 
 ##### Create major isoform annotation
@@ -23,11 +23,11 @@ Download ncbi Refseq hg38 genome assembly from https://genome.ucsc.edu/cgi-bin/h
 
 Intronless genes annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
 In order to create the intronless genes annotatio:  
-~/Rscripts/intronless_annotation.R   
+~/R_scripts/intronless_annotation.R   
 
 #### Splicing ratio calculation:  
 1) Create Exon based spliced junction read count lists using bam files:  
-~/bash/exon_based_spliced_junction.R   
+~/R_scripts/exon_based_spliced_junction.R   
 2) Calculate the splicing ratio and plot the results:  
 ~/R_scripts/splicing_ratio.R
 
