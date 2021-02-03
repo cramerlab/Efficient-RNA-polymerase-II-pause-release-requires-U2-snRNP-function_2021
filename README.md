@@ -3,7 +3,7 @@
 ### Fastq files and annotation used on this analysis are available from GEO series GSE148433.
 
 #### Pre-analysis:   
-TT-seq and RNA-seq reads aligned using STAR and filtered with Samtools. HTSeq  was used to calculate the read counts for different featues (please see https://github.com/cramerlab/TT-seq_analysis)
+TT-seq and RNA-seq reads were aligned using STAR and filtered with Samtools. HTSeq  was used to calculate the read counts for different featues (please see https://github.com/cramerlab/TT-seq_analysis)
 
 #### Annotation:
 We included in our analysis only major isoforms with 70% or higher prevalenve per gene in both DMSO and Pla-B.
@@ -30,3 +30,8 @@ R_scripts/splicing_ratio.R
 
 #### Identification of splicing-affected and unaffected transcripts:
 R_scripts/spicing_affected_unaffected.R
+
+#### Calculating elongation velocity:
+R_scripts/???
+R_scripts/RNA_amount_per_cell.R
+R_scripts/elong_velocity.R
