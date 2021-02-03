@@ -1,3 +1,5 @@
+library(GenomicAlignments)
+
 load("Annotation/human.refseq.major.TR.RData")
 load("Annotation/human.refseq.major.isoform.exon.RData")
 load("Annotation/human.refseq.extended.RData")
@@ -18,9 +20,9 @@ human.refseq.major.isoform.exon.all.non.single = cbind(human.refseq.major.isofor
 
 exon.based.spliced.junction.read.count.list = list()
 
-Bamfiles <- dir("Bamfiles")
+bam.files <- dir("Bamfiles")
 
-for (bam.file in Bamfiles){
+for (bam.file in bam.files){
   build.exon.based.spliced.junction.read.count.list = function(which.chr){
     refseq.constitutive.exons.all.non.single = human.refseq.major.isoform.exon.all.non.single[which(human.refseq.major.isoform.exon.all.non.single[,"chr"] == which.chr),]
     if (dim(refseq.constitutive.exons.all.non.single)[1] > 0){
@@ -71,8 +73,8 @@ for (bam.file in Bamfiles){
     } else {junction.counts = cbind()}
     return(junction.counts)
   }
-  caizzi.cramer.TTseq.K562.PlaB.exon.based.spliced.junction.read.count.list = foreach(n = human.chrs,.noexport = setdiff(ls(),c("human.chrs.lengths"))) %dopar% build.exon.based.spliced.junction.read.count.list(n)
-  exon.based.spliced.junction.read.count.list[[bam.file]] = do.call("rbind",caizzi.cramer.TTseq.K562.PlaB.exon.based.spliced.junction.read.count.list)
+  exon.based.spliced.junction.read.count.list.chr = foreach(n = human.chrs,.noexport = setdiff(ls(),c("human.chrs.lengths"))) %dopar% build.exon.based.spliced.junction.read.count.list(n)
+  exon.based.spliced.junction.read.count.list[[bam.file]] = do.call("rbind",exon.based.spliced.junction.read.count.list.chr)
 }
   
 save(exon.based.spliced.junction.read.count.list,file="ProcessedData/exon.based.spliced.junction.read.count.list_all.non.single.RData"))
