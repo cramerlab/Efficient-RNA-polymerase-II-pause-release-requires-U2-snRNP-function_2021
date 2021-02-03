@@ -163,7 +163,7 @@ human.refseq.major.TR_overlap=human.refseq.major.TR[which(human.refseq.major.TR$
 length(human.refseq.major.TR_overlap$transcript_id)
 
 
-save(human.refseq.major.TR,  file= "human.refseq.major.TR.RData")
-export(human.refseq.major.TR,con = "human.refseq.major.TR.gtf")
+save(human.refseq.major.TR,  file= "Annotation/human.refseq.major.TR.RData")
+export(human.refseq.major.TR,con = "Annotation/human.refseq.major.TR.gtf")
                   
                   
