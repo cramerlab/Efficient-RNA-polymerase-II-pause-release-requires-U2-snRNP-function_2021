@@ -3,10 +3,11 @@ library("dplyr")
 library("biomaRt")
 `%notin%` <- Negate(`%in%`)
 
+load("Utils/human.chrs.RData")
+
 human.refseq.anno = read.delim(file = "~/Annotation/ncbiRefSeqCurated_April2019.gtf",sep="\t",row.names = NULL,header = FALSE,stringsAsFactors = FALSE)
 dim(human.refseq.anno)
 head(human.refseq.anno)
-human.chrs=c("chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9","chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18","chr19","chr20","chr21","chr22","chrX","chrY","chrM")
 human.refseq.anno = human.refseq.anno[which(human.refseq.anno[,"V1"] %in% human.chrs),]
 
 colnames(human.refseq.anno)[1:8] = c("chr","source","type","start","end","score","strand","frame")
