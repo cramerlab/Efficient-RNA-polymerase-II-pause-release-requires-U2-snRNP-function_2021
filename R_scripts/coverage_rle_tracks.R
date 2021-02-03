@@ -21,7 +21,7 @@ for (bam.file in bam.files){
     coverage.vec = coverage(GRanges(seqnames = which.chr,ranges = IRanges(start = start(left(bam[strand(bam) == "-"])),end = end(right(bam[strand(bam) == "-"])))))[[which.chr]]
     rle.vec[1:length(coverage.vec)] = coverage.vec
     unique.transcribed.bases.coverage.track.list.chr[["-"]] = rle.vec
-    save(unique.transcribed.bases.coverage.track.list.chr,file = "ProcessedData/UniqueTranscribedBasesCoverageRleTracks/bam.file/paste0("unique.transcribed.bases.coverage.track.list.",which.chr,".RData"))
+    save(unique.transcribed.bases.coverage.track.list.chr,file = file.path("ProcessedData","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",which.chr,".RData"))
     return()
   }
     unique.transcribed.bases.coverage.track.list = foreach(n = human.chrs,.noexport = setdiff(ls(),c("human.chrs.lengths"))) %dopar% build.unique.transcribed.bases.coverage.track.list(n)
