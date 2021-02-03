@@ -20,9 +20,7 @@ Download ncbi Refseq hg38 genome assembly from https://genome.ucsc.edu/cgi-bin/h
 ~/bash/salmon.sh  
 ~/R_scripts/major_isoform_selection.R. 
 
-
-Intronless genes annotation used on this analysis can be found in https://github.com/cramerlab/Efficient-RNA-polymerase-II-pause-release-requires-U2-snRNP-function_2020/Annotation. 
-In order to create the intronless genes annotatio:  
+##### Create intronless genes annotation:  
 ~/R_scripts/intronless_annotation.R   
 
 #### Splicing ratio calculation:  
