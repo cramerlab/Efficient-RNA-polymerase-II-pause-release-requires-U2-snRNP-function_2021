@@ -77,7 +77,7 @@ junctions_all_3prime=rbind(junctions_int[,3:4], junctions_last)
 dim(junctions_all_5prime)
 dim(junctions_all_3prime)
 
-mkdir("Visualization")
+dir.create("Visualization")
 pdf(file="Visualization/Junctions_ALL.junctions.pdf")
 boxplot(junctions_all_5prime[,"control_5prime.spliced"], junctions_all_5prime[, "treatment_5prime.spliced"], junctions_all_3prime[,"control_3prime.spliced"], junctions_all_3prime[,"treatment_3prime.spliced"], ylim=c(0,1.2),outline=FALSE, notch=TRUE, main= "Splicing rate \n 5'SS 3'SS \n", names=c("control \n 5'SS","treatment \n 5'SS","control \n 3'SS","treatment \n 3'SS"), col=c("darkgrey","indianred3"))
 dev.off() 
@@ -121,7 +121,7 @@ length(exon_last_1)
 junctions_last_1=junctions[which(rownames(junctions) %in% exon_last_1),]
 
 
-pdf(file=""Visualization/Junctions_first_int_last.pdf", width=20, height=10)
+pdf(file="Visualization/Junctions_first_int_last.pdf", width=20, height=10)
 par(cex.axis=0.8)
 boxplot(junctions_first4[,c("control_5prime.spliced")],junctions_first4[,c("treatment_5prime.spliced")],junctions_2_4[,"control_3prime.spliced"],junctions_2_4[,"treatment_3prime.spliced"], junctions_int4[,"control_5prime.spliced"], junctions_int4[,"treatment_5prime.spliced"],junctions_int4[,"control_3prime.spliced"], junctions_int4[,"treatment_3prime.spliced"], junctions_last_1[,"control_5prime.spliced"],junctions_last_1[,"treatment_5prime.spliced"],junctions_last4[,c("control_3prime.spliced")],junctions_last4[,c("treatment_3prime.spliced")], ylim=c(0,1), outline=FALSE, notch=TRUE, main= "Splicing rate \n First, Intermediate, Last \n Ctr vs AMOU2", names=c("control \n First donor","treatment \n First donor","control \n First acceptor", "treatment \n First acceptor","control \n Intermediate donor","treatment \n Intermediate donor", "control \n Intermediate acceptor", "treatment \n Intermediate acceptor","control \n Last donor", "treatment \n Last donor","control \n Last acceptor","treatment \n Last acceptor"), col=c("darkgrey","indianred3", "grey85","rosybrown1"), at = c(1:4, 6:9, 11:14))
 dev.off()
