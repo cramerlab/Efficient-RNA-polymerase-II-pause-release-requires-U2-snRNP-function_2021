@@ -15,18 +15,18 @@ Download ncbi Refseq hg38 genome assembly from https://genome.ucsc.edu/cgi-bin/h
 R_scripts/create_anno.R   
 R_scripts/create_extended.R 
 
-##### Create major isoform annotation
+##### Create major isoform annotation:
 bash/salmon.sh  
 R_scripts/major_isoform_selection.R. 
 
-##### Create intronless genes annotation:  
+##### Create intronless genes annotation:
 R_scripts/intronless_annotation.R   
 
-#### Splicing ratio calculation:  
+#### Splicing ratio calculation:
 1) Create Exon based spliced junction read count lists using bam files:  
 R_scripts/exon_based_spliced_junction.R   
 2) Calculate the splicing ratio and plot the results:  
 R_scripts/splicing_ratio.R
 
-#### Identification of splicing-affected and unaffected transcripts:  
+#### Identification of splicing-affected and unaffected transcripts:
 R_scripts/spicing_unaffected.R
