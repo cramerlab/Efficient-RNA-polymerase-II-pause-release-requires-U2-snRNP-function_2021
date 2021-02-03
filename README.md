@@ -29,4 +29,4 @@ R_scripts/exon_based_spliced_junction.R
 R_scripts/splicing_ratio.R
 
 #### Identification of splicing-affected and unaffected transcripts:
-R_scripts/spicing_unaffected.R
+R_scripts/spicing_affected_unaffected.R
