@@ -1,4 +1,4 @@
-# Efficient RNA-polymerase II pause release requires U2 snRNP function (2020)
+# Efficient RNA-polymerase II pause release requires U2 snRNP function (2021)
 
 ### Fastq files and annotation used on this analysis are available from GEO series GSE148433.
 
@@ -32,6 +32,7 @@ R_scripts/splicing_ratio.R
 R_scripts/spicing_affected_unaffected.R
 
 #### Calculating elongation velocity:
-R_scripts/???
+R_scripts/coverage_rle_tracks.R
+R_scripts/coverage.R
 R_scripts/RNA_amount_per_cell.R
 R_scripts/elong_velocity.R
