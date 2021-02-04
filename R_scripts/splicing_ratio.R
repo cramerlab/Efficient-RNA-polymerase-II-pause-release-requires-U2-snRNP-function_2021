@@ -1,12 +1,14 @@
 load("Annotation/human.refseq.major.isoform.exon.RData")
-load("Annotation/expressed.TR.5.50.RData")
 load("Annotation/protein.coding.RData")
+
+#expressed.TR.5.50 calculation can be found in https://github.com/cramerlab/TT-seq_analysis/
+load("ProcessedData/TTseq/expressed.TR.5.50.RData")
 
 human.refseq.major.isoform.exon=human.refseq.major.isoform.exon[which(human.refseq.major.isoform.exon$transcript_id %in% expressed.TR.5.50),]
 human.refseq.major.isoform.exon=human.refseq.major.isoform.exon[which(human.refseq.major.isoform.exon$transcript_id %in% protein.coding),]
 
 ###FIRST NON SINGLE Splicing rate####
-load("ProcessedData/exon.based.spliced.junction.read.count.list_all.non.single.RData")
+load("ProcessedData/TTseq/exon.based.spliced.junction.read.count.list_all.non.single.RData")
 treatment_1 <- exon.based.spliced.junction.read.count.list$treatment1.bam
 treatment_2 <- exon.based.spliced.junction.read.count.list$treatment2.bam
 treatment=cbind(treatment_1[which(treatment_1$id %in% treatment_2$id),], treatment_2[which(treatment_2$id %in% treatment_1$id),12:19])
@@ -78,7 +80,7 @@ dim(junctions_all_5prime)
 dim(junctions_all_3prime)
 
 dir.create("Visualization")
-pdf(file="Visualization/Junctions_ALL.junctions.pdf")
+pdf(file="Visualization/Junctions.pdf")
 boxplot(junctions_all_5prime[,"control_5prime.spliced"], junctions_all_5prime[, "treatment_5prime.spliced"], junctions_all_3prime[,"control_3prime.spliced"], junctions_all_3prime[,"treatment_3prime.spliced"], ylim=c(0,1.2),outline=FALSE, notch=TRUE, main= "Splicing rate \n 5'SS 3'SS \n", names=c("control \n 5'SS","treatment \n 5'SS","control \n 3'SS","treatment \n 3'SS"), col=c("darkgrey","indianred3"))
 dev.off() 
 
