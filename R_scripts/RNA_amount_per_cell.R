@@ -11,8 +11,8 @@
 # Molecular Weight of 4-Thiouridine (Ribonucleotide Monophosphate)
 # U + S - O: 306.2 + 32.06 - 16 = 322.26
 
-load("Annotation/spikein.anno.corrected.RData")
-spikein.genome = readDNAStringSet(filepath = file.path(prewd,"RawData","SpikeIns","spikeins.corrected.fa"))
+load("Annotation/spikein.anno.RData")
+spikein.genome = readDNAStringSet(filepath = "RawData/spikeins.fa")
 
 nucleotide.counts = letterFrequency(spikein.genome,multi.mer.list[["1"]][1:4])
 rownames(nucleotide.counts) = names(spikein.genome)
@@ -33,10 +33,10 @@ spikein.number.per.cell = spikein.number/(5.0*10^7)
 
 load("ProcessedData/spikein.anno.transcript.coverage.RData")
 
-conversion.factor.to.amount.per.cell = mean(apply(spikein.anno.transcript.coverage[c("chrS2","chrS4","chrS8"),c("control_1.bam","control_2.bam")]/(spikein.anno.corrected[which(spikein.anno.corrected[,"chr"] %in% c("chrS2","chrS4","chrS8")),"end"]*spikein.number.per.cell),2,median))
+conversion.factor.to.amount.per.cell = mean(apply(spikein.anno.transcript.coverage[c("chrS2","chrS4","chrS8"),c("control_1.bam","control_2.bam")]/(spikein.anno[which(spikein.anno[,"chr"] %in% c("chrS2","chrS4","chrS8")),"end"]*spikein.number.per.cell),2,median))
 conversion.factor.to.amount.per.cell
 
-cv = sd(apply(spikein.anno.transcript.coverage[c("chrS2","chrS4","chrS8"),]/(spikein.anno.corrected[which(spikein.anno.corrected[,"chr"] %in% c("chrS2","chrS4","chrS8")),"end"]*spikein.number.per.cell),2,median))/conversion.factor.to.amount.per.cell
+cv = sd(apply(spikein.anno.transcript.coverage[c("chrS2","chrS4","chrS8"),]/(spikein.anno[which(spikein.anno[,"chr"] %in% c("chrS2","chrS4","chrS8")),"end"]*spikein.number.per.cell),2,median))/conversion.factor.to.amount.per.cell
 
 save(conversion.factor.to.amount.per.cell,file = "ProcessedData/conversion.factor.to.amount.per.cell.RData")
 
