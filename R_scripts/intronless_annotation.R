@@ -1,8 +1,8 @@
 #STEP1 - Select intronless genes
 
 ##SELECT GENES WITH ONE EXON BASED ON NCBI CURATED HG38
-load("~/Annotation/human.refseq.anno.RData")
-load("~/Annotation/human.refseq.major.TR.RData")
+load("Annotation/human.refseq.anno.RData")
+load("Annotation/human.refseq.major.TR.RData")
 
 #Check how many exons a gene has
 intronless_genes_exons=human.refseq.anno[which(human.refseq.anno$type=="exon"),]
@@ -21,7 +21,7 @@ length(intronless_anno$transcript_id)
 intronless=intronless_anno$transcript_id
 
 #STEP2 - Keep only intronless that do not overlapp with intron-containing annotated genes (1kb)
-load("~/Annotation/human.refseq.extended.RData")
+load("Annotation/human.refseq.extended.RData")
 human.refseq.extended.tr=human.refseq.extended[which(human.refseq.extended[,"type"] == "transcript"),]
 
 #All intronless genes (being or not part of the major isoform annotation)
@@ -91,5 +91,5 @@ summary(intronless_no_overlaps$threeUTR)
 intronless_anno=intronless_no_overlaps[which(intronless_no_overlaps$fiveUTR <100 & intronless_no_overlaps$threeUTR < 100),]
 dim(intronless_anno)
 
-save(intronless_anno, file="~/Annotation/intronless_anno.RData"))
+save(intronless_anno, file="Annotation/intronless_anno.RData"))
 
