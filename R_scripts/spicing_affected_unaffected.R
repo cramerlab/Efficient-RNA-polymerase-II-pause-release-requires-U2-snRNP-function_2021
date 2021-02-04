@@ -1,7 +1,7 @@
-load("ProcessedData/exon.based.spliced.junction.read.count.list_all.non.single.RData")
+load("ProcessedData/TTseq/exon.based.spliced.junction.read.count.list_all.non.single.RData")
 
 #sequencing.depth calculation can be found in https://github.com/cramerlab/TT-seq_analysis/
-load("ProcessedData/sequencing.depth.RData") 
+load("ProcessedData/TTseq/sequencing.depth.RData") 
 
 control_1 <- exon.based.spliced.junction.read.count.list$control1.bam[,c(6,12:19)] 
 control_2 <- exon.based.spliced.junction.read.count.list$control2.bam[,c(6,12:19)]
@@ -43,7 +43,6 @@ dds = dds[rowSums(counts(dds)) > 1,]
 dds = DESeq(dds)
 res_5SS <- results(dds, contrast=c("condition","treatment", "control"), altHypothesis = "less") 
 summary(res_5SS)
-save(res_5SS,file="res_5SS_spikein_exons.RData")
 plotMA(res_5SS, main="Splicing 5'SS (Exons)", ylim=c(-3,3))
 
 #Unnafected
@@ -51,8 +50,6 @@ ddsNoPrior <- DESeq(dds, betaPrior=FALSE)
   
 unchange_5SS=results(ddsNoPrior, contrast=c("condition","treatment", "control"), lfcThreshold=1.5, altHypothesis = "lessAbs")
 summary(unchange_5SS)
-
-save(unchange_5SS,file="unchange_5SS_spikein_exons.RData")
 
 plotMA(unchange_5SS, main="Unchanged 5'SS (Exons), altHypothesis=leAMOU2bs",ylim=c(-3,3))
 
@@ -82,7 +79,6 @@ dds = DESeq(dds)
 #res = results(dds)
 res_3SS <- results(dds, contrast=c("condition","treatment", "control"), altHypothesis = "less") 
 summary(res_3SS)
-save(res_3SS,file="res_3SS_spikein_exons.RData")
 plotMA(res_5SS, main="Splicing 3'SS (Exons)", ylim=c(-3,3))
 
 #Unnafected
@@ -90,8 +86,6 @@ ddsNoPrior <- DESeq(dds, betaPrior=FALSE)
   
 unchange_3SS=results(ddsNoPrior, contrast=c("condition","treatment", "control"), lfcThreshold=1.5, altHypothesis = "lessAbs")
 summary(unchange_3SS)
-
-save(unchange_3SS,file="unchange_3SS_spikein_exons.RData")
 
 plotMA(unchange_3SS, main="Unchanged 3'SS (Exons), altHypothesis=less",ylim=c(-3,3))
 
@@ -123,7 +117,7 @@ length(TR_three.prime.sec)
 TR.exon=union(TR_five.prime.first, TR_three.prime.sec)
 length(TR.exon) 
 
-save(TR.exon, file= "TR.exon.RData")
+save(TR.exon, file= "ProcessedData/TTseq/TR.exon.RData")
 
 #Select unaffected exons
 five.prime.exons.un=subset(unchange_5SS,padj < 0.05 & log2FoldChange > -1.5 & log2FoldChange < 1.5)
@@ -148,4 +142,4 @@ TR.un.exon=union(TR_five.prime.un.first, TR_three.prime.un.sec)
 length(TR.un.exon) 
 length(intersect(TR.exon, TR.un.exon))
 
-save(TR.un.exon, file= "TR.un.exon.RData")
+save(TR.un.exon, file= "ProcessedData/TTseq/TR.un.exon.RData")
