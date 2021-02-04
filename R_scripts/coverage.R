@@ -28,7 +28,7 @@ human.refseq.major.isoform.exon.coverage = sapply(human.refseq.major.isoform.exo
 rownames(human.refseq.major.isoform.exon.coverage) = as.character(human.refseq.major.isoform.exon[as.numeric(unlist(index.subsets,recursive = TRUE,use.names = FALSE)), "id"])
 colnames(human.refseq.major.isoform.exon.coverage) = bam.files
 
-save(human.refseq.major.isoform.exon.coverage,file=file.path("ProcessedData/human.refseq.major.isoform.exon.coverage.RData"))
+save(human.refseq.major.isoform.exon.coverage,file="ProcessedData/human.refseq.major.isoform.exon.coverage.RData")
 
 #Exon coverage antisense
 human.refseq.major.isoform.exon.antisense.coverage = list()
@@ -55,7 +55,7 @@ human.refseq.major.isoform.exon.antisense.coverage = sapply(human.refseq.major.i
 rownames(human.refseq.major.isoform.exon.antisense.coverage) = as.character(human.refseq.major.isoform.exon[as.numeric(unlist(index.subsets,recursive = TRUE,use.names = FALSE)),"id"])
 colnames(human.refseq.major.isoform.exon.antisense.coverage) = bam.files
 
-save(human.refseq.major.isoform.exon.antisense.coverage,file="ProcessedData/human.refseq.major.isoform.exon.antisense.coverage.RData"))
+save(human.refseq.major.isoform.exon.antisense.coverage,file="ProcessedData/human.refseq.major.isoform.exon.antisense.coverage.RData")
 
 #Exon coverage antisense corrected
 #antisense.bias.ratio calculation can be found in https://github.com/cramerlab/TT-seq_analysis/
@@ -96,7 +96,7 @@ human.refseq.major.isoform.intron.coverage = sapply(human.refseq.major.isoform.i
 rownames(human.refseq.major.isoform.intron.coverage) = as.character(human.refseq.major.isoform.intron[as.numeric(unlist(index.subsets,recursive = TRUE,use.names = FALSE)), "id"])
 colnames(human.refseq.major.isoform.intron.coverage) = bam.files
 
-save(human.refseq.major.isoform.intron.coverage,file=file.path("ProcessedData/human.refseq.major.isoform.intron.coverage.RData"))
+save(human.refseq.major.isoform.intron.coverage,file="ProcessedData/human.refseq.major.isoform.intron.coverage.RData")
 
 #Intron coverage antisense
 human.refseq.major.isoform.intron.antisense.coverage = list()
@@ -124,7 +124,7 @@ human.refseq.major.isoform.intron.antisense.coverage = sapply(human.refseq.major
 rownames(human.refseq.major.isoform.intron.antisense.coverage) = as.character(human.refseq.major.isoform.intron[as.numeric(unlist(index.subsets,recursive = TRUE,use.names = FALSE)),"id"])
 colnames(human.refseq.major.isoform.intron.antisense.coverage) = bam.files
 
-save(human.refseq.major.isoform.intron.antisense.coverage,file="ProcessedData/human.refseq.major.isoform.intron.antisense.coverage.RData"))
+save(human.refseq.major.isoform.intron.antisense.coverage,file="ProcessedData/human.refseq.major.isoform.intron.antisense.coverage.RData")
 
 #Intron coverage antisense corrected
 #antisense.bias.ratio calculation can be found in https://github.com/cramerlab/TT-seq_analysis/
@@ -135,8 +135,37 @@ human.refseq.major.isoform.intron.coverage.antisense.corrected[human.refseq.majo
 
 save(human.refseq.major.isoform.intron.coverage.antisense.corrected,file="ProcessedData/human.refseq.major.isoform.intron.coverage.antisense.corrected.RData")
 
+#SPIKEIN COVERAGE
+load(file.path("AnnotationObjects","spikein.anno.RData"))
 
+spikein.anno.transcript.coverage = list()
+for (bam.file in bam.files){
+  index.subsets = split(1:nrow(spikein.anno),paste(as.character(spikein.anno[,"strand"]),"_",spikein.anno[,"chr"],sep = ""))
+  
+  coverage.list = list()
+  
+  build.coverage.list = function(j){
+    from.transcript = strand.chr.spikein.anno[j,"start"]
+    to.transcript = strand.chr.spikein.anno[j,"end"]
+    return(sum(as.vector(strand.chr.coverage.from.bam[from.transcript:to.transcript])))
+  }
+  
+  for (index.subset in names(index.subsets)){
+    load(file.path("ProcessedData","UniquePairedFragmentSpikeinCoverageRleTracks",bam.file,paste0("unique.paired.fragment.spikein.coverage.track.list.",unlist(strsplit(index.subset,split = "_"))[2],".RData")))
+    
+    strand.chr.coverage.from.bam = unique.paired.fragment.spikein.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
+    strand.chr.spikein.anno = spikein.anno[index.subsets[[index.subset]],c("start","end","length")]
+    
+    registerDoParallel(cores = mc.cores)
+    coverage.list[[index.subset]] = foreach(n = 1:nrow(strand.chr.spikein.anno),.noexport = setdiff(ls(),c("strand.chr.coverage.from.bam","strand.chr.spikein.anno","build.coverage.list"))) %dopar% build.coverage.list(n)
+  }
+  spikein.anno.transcript.coverage[[bam.file]] = unlist(coverage.list,recursive = TRUE,use.names = FALSE)
+}
+spikein.anno.transcript.coverage = sapply(spikein.anno.transcript.coverage,c)
+rownames(spikein.anno.transcript.coverage) = as.character(spikein.anno[as.numeric(unlist(index.subsets,recursive = TRUE,use.names = FALSE)),"chr"])
+colnames(spikein.anno.transcript.coverage) = bam.files
 
+save(spikein.anno.transcript.coverage,file="ProcessedData/spikein.anno.transcript.coverage.RData")
 
 
 
