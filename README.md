@@ -32,7 +32,7 @@ R_scripts/splicing_ratio.R
 R_scripts/spicing_affected_unaffected.R
 
 #### Calculating elongation velocity:
-R_scripts/coverage_rle_tracks.R
-R_scripts/coverage.R
-R_scripts/RNA_amount_per_cell.R
-R_scripts/elong_velocity.R
+R_scripts/coverage_rle_tracks.R  
+R_scripts/coverage.R  
+R_scripts/RNA_amount_per_cell.R  
+R_scripts/elong_velocity.R  
