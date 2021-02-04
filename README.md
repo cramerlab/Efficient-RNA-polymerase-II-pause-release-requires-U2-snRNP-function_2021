@@ -36,8 +36,8 @@ R_scripts/spicing_affected_unaffected.R
 R_scripts/TTseq_coverage_rle_tracks.R  
 R_scripts/mNETseq_coverage_rle_tracks.R  
 2) Create coverage files from rle tracks:  
-(for mNET seq create coverage using ProcessedData/mNETseq/FragmentEndRleTracks)
-R_scripts/coverage.R  
+(for mNET seq create coverage using ProcessedData/mNETseq/FragmentEndRleTracks)   
+R_scripts/coverage.R   
 3)Calculate the RNA amount pre cell (based on TT-seq spike-ins coverage)  
 R_scripts/RNA_amount_per_cell.R  
 4) Calculate the elongation velocity using TT-seq and mNET-seq normalized coverage:  
