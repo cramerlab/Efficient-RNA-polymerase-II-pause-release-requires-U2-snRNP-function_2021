@@ -3,15 +3,17 @@ library(GenomicAlignments)
 load("Utils/human.chrs.RData")
 load("Utils/human.chrs.length.RData")
 
-dir.create("ProcessedData/TTseq/UniqueTranscribedBasesCoverageRleTracks"))
+dir.create("ProcessedData/TTseq")
+dir.create("ProcessedData/TTseq/UniqueTranscribedBasesCoverageRleTracks")
+
 bam.files <- dir("TTseq/Bamfiles")
 
 for (bam.file in bam.files){
-  dir.create("ProcessedData/TTseq/UniqueTranscribedBasesCoverageRleTracks/bam.file")
+  dir.create(file.path("ProcessedData","TTseq","UniqueTranscribedBasesCoverageRleTracks",bam.file)
   build.unique.transcribed.bases.coverage.track.list = function(which.chr){
     unique.transcribed.bases.coverage.track.list.chr = list()
     param = ScanBamParam(which=GRanges(seqnames = which.chr,ranges = IRanges(0,human.chrs.lengths[which.chr])))
-    bam = readGAlignmentPairs(file = "TTseq/Bamfiles/bam.file"),param = param)
+    bam = readGAlignmentPairs(file = file.path("TTseq","Bamfiles",bam.file),param = param)
     bam = bam[start(left(bam)) <= end(right(bam))]
     rle.vec = Rle(0,human.chrs.lengths[which.chr])
     coverage.vec = coverage(GRanges(seqnames = which.chr,ranges = IRanges(start = start(left(bam[strand(bam) == "+"])),end = end(right(bam[strand(bam) == "+"])))))[[which.chr]]
