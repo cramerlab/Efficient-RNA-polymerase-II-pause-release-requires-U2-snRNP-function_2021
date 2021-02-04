@@ -35,8 +35,8 @@ R_scripts/spicing_affected_unaffected.R
 1) Create Unique Transcribed Bases Rle Tracks for TT-seq and Fragment End Rle Tracks for mNET-seq: 
 R_scripts/TT-seq_coverage_rle_tracks.R  
 R_scripts/mNET-seq_coverage_rle_tracks.R  
-2) Create coverage files from rle tracks  
-* for mNET seq create coverage using ProcessedData/mNETseq/FragmentEndRleTracks  
+2) Create coverage files from rle tracks:  
+- for mNET seq create coverage using ProcessedData/mNETseq/FragmentEndRleTracks  
 R_scripts/coverage.R  
 3)Calculate the RNA amount pre cell (based on TT-seq spike-ins coverage)  
 R_scripts/RNA_amount_per_cell.R  
