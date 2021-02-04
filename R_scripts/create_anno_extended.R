@@ -1,4 +1,4 @@
-load("~/Annotation/human.refseq.anno.RData")
+load("Annotation/human.refseq.anno.RData")
 human.refseq.extended.list = list()
 human.refseq.extended.list[["+"]] = list()
 human.refseq.extended.list[["-"]] = list()
@@ -151,7 +151,8 @@ human.refseq.extended[,c("start","end","exon_number","length","placing")] = appl
 human.refseq.extended[,"length"] = human.refseq.extended[,"end"] - human.refseq.extended[,"start"] + 1
 human.refseq.extended[,"placing"] = as.character(1:dim(human.refseq.extended)[1])
 human.refseq.extended$gene_name=sub('\\..*', '', human.refseq.extended$gene_name)
-human.refseq.extended[,"gene_name"] = ensembl.biomart.refseq.2.ensembl.gene.id.mapping[human.refseq.extended[,"gene_name"]]
+load("Annotation/mapping.RData")
+human.refseq.extended[,"gene_name"] = mapping[,"gene_name"]]
 dim(human.refseq.extended)
 head(human.refseq.extended)
 
