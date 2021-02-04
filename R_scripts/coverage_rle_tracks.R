@@ -3,11 +3,11 @@ library(GenomicAlignments)
 load("Utils/human.chrs.RData")
 load("Utils/human.chrs.length.RData")
 
-dir.create("ProcessedData/UniqueTranscribedBasesCoverageRleTracks"))
+dir.create("ProcessedData/TTseq/UniqueTranscribedBasesCoverageRleTracks"))
 bam.files <- dir("Bamfiles")
 
 for (bam.file in bam.files){
-  dir.create("ProcessedData/UniqueTranscribedBasesCoverageRleTracks/bam.file")
+  dir.create("ProcessedData/TTseq/UniqueTranscribedBasesCoverageRleTracks/bam.file")
   build.unique.transcribed.bases.coverage.track.list = function(which.chr){
     unique.transcribed.bases.coverage.track.list.chr = list()
     param = ScanBamParam(which=GRanges(seqnames = which.chr,ranges = IRanges(0,human.chrs.lengths[which.chr])))
@@ -21,7 +21,7 @@ for (bam.file in bam.files){
     coverage.vec = coverage(GRanges(seqnames = which.chr,ranges = IRanges(start = start(left(bam[strand(bam) == "-"])),end = end(right(bam[strand(bam) == "-"])))))[[which.chr]]
     rle.vec[1:length(coverage.vec)] = coverage.vec
     unique.transcribed.bases.coverage.track.list.chr[["-"]] = rle.vec
-    save(unique.transcribed.bases.coverage.track.list.chr,file = file.path("ProcessedData","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",which.chr,".RData"))
+    save(unique.transcribed.bases.coverage.track.list.chr,file = file.path("ProcessedData","TTseq","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",which.chr,".RData"))
     return()
   }
     unique.transcribed.bases.coverage.track.list = foreach(n = human.chrs,.noexport = setdiff(ls(),c("human.chrs.lengths"))) %dopar% build.unique.transcribed.bases.coverage.track.list(n)
