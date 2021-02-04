@@ -5,7 +5,7 @@ library("biomaRt")
 
 load("Utils/human.chrs.RData")
 
-human.refseq.anno = read.delim(file = "~/Annotation/ncbiRefSeqCurated.gtf",sep="\t",row.names = NULL,header = FALSE,stringsAsFactors = FALSE)
+human.refseq.anno = read.delim(file = "Annotation/ncbiRefSeqCurated.gtf",sep="\t",row.names = NULL,header = FALSE,stringsAsFactors = FALSE)
 dim(human.refseq.anno)
 head(human.refseq.anno)
 human.refseq.anno = human.refseq.anno[which(human.refseq.anno[,"V1"] %in% human.chrs),]
@@ -51,4 +51,4 @@ mapping=ensembl.biomart.refseq.2.ensembl.gene.id.mapping$gene_name
 names(mapping)=ensembl.biomart.refseq.2.ensembl.gene.id.mapping$transcript_id
 human.refseq.anno$gene_name=mapping[human.refseq.anno$transcript_id]
 
-save(human.refseq.anno,file = "~/Annotation/human.refseq.anno.RData"))
+save(human.refseq.anno,file = "Annotation/human.refseq.anno.RData"))
