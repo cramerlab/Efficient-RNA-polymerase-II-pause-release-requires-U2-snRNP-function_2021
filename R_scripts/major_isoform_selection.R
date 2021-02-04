@@ -10,10 +10,10 @@ library(GenomicRanges)
   
   
 #COMPARE DMSO1h vs PlaB1h
-DMSO1h_1=read.table("../salmon/DMSO1h_1_quant.sf", header = T)
-DMSO1h_2=read.table("../salmon/DMSO1h_2_quant.sf", header = T)
-PlaB1h_1=read.table("../salmon/PlaB1h_1_quant.sf", header = T)
-PlaB1h_2=read.table("../salmon/PlaB1h_2_quant.sf", header = T)
+DMSO1h_1=read.table("salmon/DMSO1h_1_quant.sf", header = T)
+DMSO1h_2=read.table("salmon/DMSO1h_2_quant.sf", header = T)
+PlaB1h_1=read.table("salmon/PlaB1h_1_quant.sf", header = T)
+PlaB1h_2=read.table("salmon/PlaB1h_2_quant.sf", header = T)
 
 
 Quant=cbind(DMSO1h_1[,4],DMSO1h_2[,4],PlaB1h_1[,4], PlaB1h_2[,4])
@@ -165,5 +165,24 @@ length(human.refseq.major.TR_overlap$transcript_id)
 
 save(human.refseq.major.TR,  file= "Annotation/human.refseq.major.TR.RData")
 export(human.refseq.major.TR,con = "Annotation/human.refseq.major.TR.gtf")
+                  
+#Exons anno
+human.refseq.anno.exon = human.refseq.extended[which(human.refseq.extended[,"type"] == "exon"),]
+human.refseq.anno.exon$transcript_id=sub('\\..*', '', human.refseq.anno.exon$transcript_id)
+human.refseq.major.isoform.exon = human.refseq.anno.exon[which(human.refseq.anno.exon[,"transcript_id"] %in% ALL),]
+human.refseq.major.isoform.exon=human.refseq.major.isoform.exon[,c("chr", "strand", "type", "start", "end", "transcript_id", "id","length","exon_order"),]
+
+save(human.refseq.major.isoform.exon, file= "Annotation/human.refseq.major.isoform.exon.RData")
+export(human.refseq.major.isoform.exon,con = "Annotation/human.refseq.major.isoform.exon.gtf")
+                  
+#Introns anno
+human.refseq.anno.intron = human.refseq.extended[which(human.refseq.extended[,"type"] == "intron"),]
+human.refseq.anno.intron$transcript_id=sub('\\..*', '', human.refseq.anno.intron$transcript_id)
+human.refseq.major.isoform.intron = human.refseq.anno.intron[which(human.refseq.anno.intron[,"transcript_id"] %in% ALL),]
+human.refseq.major.isoform.intron=human.refseq.major.isoform.intron[,c("chr", "strand", "type", "start", "end", "transcript_id", "id","length","intron_order"),]
+
+save(human.refseq.major.isoform.intron, file= "Annotation/human.refseq.major.isoform.intron.RData")
+export(human.refseq.major.isoform.intron,con = "Annotation/human.refseq.major.isoform.intron.gtf")
+
                   
                   
