@@ -47,8 +47,10 @@ trs=trs$transcript_id
 ensembl.biomart.mapping=ensembl.biomart.mapping[which(ensembl.biomart.mapping$transcript_id %notin% trs),]
 
 
-mapping=ensembl.biomart.refseq.2.ensembl.gene.id.mapping$gene_name
-names(mapping)=ensembl.biomart.refseq.2.ensembl.gene.id.mapping$transcript_id
+mapping=ensembl.biomart.mapping$gene_name
+names(mapping)=ensembl.mapping$transcript_id
+save(mapping,file = "Annotation/mapping.RData")
+
 human.refseq.anno$gene_name=mapping[human.refseq.anno$transcript_id]
 
-save(human.refseq.anno,file = "Annotation/human.refseq.anno.RData"))
+save(human.refseq.anno,file = "Annotation/human.refseq.anno.RData")
