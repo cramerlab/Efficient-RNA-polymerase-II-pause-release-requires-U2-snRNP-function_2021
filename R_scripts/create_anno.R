@@ -5,7 +5,7 @@ library("biomaRt")
 
 load("Utils/human.chrs.RData")
 
-human.refseq.anno = read.delim(file = "~/Annotation/ncbiRefSeqCurated_April2019.gtf",sep="\t",row.names = NULL,header = FALSE,stringsAsFactors = FALSE)
+human.refseq.anno = read.delim(file = "~/Annotation/ncbiRefSeqCurated.gtf",sep="\t",row.names = NULL,header = FALSE,stringsAsFactors = FALSE)
 dim(human.refseq.anno)
 head(human.refseq.anno)
 human.refseq.anno = human.refseq.anno[which(human.refseq.anno[,"V1"] %in% human.chrs),]
@@ -18,7 +18,6 @@ human.refseq.anno$gene_id <- substring(test$gene_id, nchar("gene_id "))
 human.refseq.anno$gene_id <- substring(test$gene_id, nchar("transcript_id "))
 
 human.refseq.anno = cbind(human.refseq.anno,"length" = abs(human.refseq.anno[,"start"] - human.refseq.anno[,"end"] + 1),"placing" = as.character(1:dim(human.refseq.anno)[1]))
-save(human.refseq.anno,file = file.path("AnnotationObjects","human.refseq.anno.2021.RData"))
 
 #ADD ensembl gene name
 #remove transcript version because ensembl biomart transcript output doesn't have the version
