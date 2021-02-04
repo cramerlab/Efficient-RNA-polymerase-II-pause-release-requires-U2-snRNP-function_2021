@@ -6,8 +6,9 @@ load("Annotation/human.refseq.extended.RData")
 load("Utils/human.chrs.RData")
 
 human.refseq.intron.anno.ranges = as(human.refseq.extended[which(human.refseq.extended[,"type"] == "intron"),],"GRanges")
-  
-load("ProcessedData/expressed.TR.5.50.RData")
+
+#expressed.TR.5.50 calculation can be found in https://github.com/cramerlab/TT-seq_analysis/
+load("ProcessedData/TTseq/expressed.TR.5.50.RData")
 load("Annotation/protein.coding.RData")
   
 human.refseq.major.isoform.exon=human.refseq.major.isoform.exon[which(human.refseq.major.isoform.exon$transcript_id %in% expressed.TR.5.50),]
@@ -20,7 +21,7 @@ human.refseq.major.isoform.exon.all.non.single = cbind(human.refseq.major.isofor
 
 exon.based.spliced.junction.read.count.list = list()
 
-bam.files <- dir("Bamfiles")
+bam.files <- dir("TTseq/Bamfiles")
 
 for (bam.file in bam.files){
   build.exon.based.spliced.junction.read.count.list = function(which.chr){
@@ -29,7 +30,7 @@ for (bam.file in bam.files){
       junction.counts = cbind(refseq.constitutive.exons.all.non.single,"three.prime.unspliced" = 0,"three.prime.spliced" = 0,"three.prime.total" = 0,"three.prime.inner.mate.exclusive" = 0,"five.prime.unspliced" = 0,"five.prime.spliced" = 0,"five.prime.total" = 0,"five.prime.inner.mate.exclusive" = 0)
       rownames(junction.counts) = rownames(refseq.constitutive.exons.all.non.single)
       param = ScanBamParam(which=GRanges(seqnames = which.chr,ranges = IRanges(0,human.chrs.lengths[which.chr])))
-      bam = readGAlignmentPairs(file = "Bamfiles/bam.file",param = param)
+      bam = readGAlignmentPairs(file = "TTseq/Bamfiles/bam.file",param = param)
       bam = bam[start(left(bam)) <= end(right(bam))]
 
       bam.single.reads = c(left(bam),right(bam))
@@ -77,5 +78,5 @@ for (bam.file in bam.files){
   exon.based.spliced.junction.read.count.list[[bam.file]] = do.call("rbind",exon.based.spliced.junction.read.count.list.chr)
 }
   
-save(exon.based.spliced.junction.read.count.list,file="ProcessedData/exon.based.spliced.junction.read.count.list_all.non.single.RData"))
+save(exon.based.spliced.junction.read.count.list,file="ProcessedData/TTseq/exon.based.spliced.junction.read.count.list_all.non.single.RData"))
   
