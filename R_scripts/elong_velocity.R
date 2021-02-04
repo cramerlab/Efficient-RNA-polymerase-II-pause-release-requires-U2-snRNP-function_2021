@@ -1,13 +1,14 @@
-load("ProcessedData/expressed.TR.5.50.RData")
-load("ProcessedData/protein.coding.RData")
-
 load("AnnotationObjects/human.refseq.major.isoform.exon.RData")
 load("AnnotationObjects/human.refseq.major.isoform.intron.RData")
+load("AnnotationObjects/protein.coding.RData")
+
+#sequencing.depth, cross.contamination and antisense.bias.ratio calculation can be found in https://github.com/cramerlab/TT-seq_analysis/
 load("ProcessedData/TTseq/sequencing.depth.RData")
 load("ProcessedData/TTseq/cross.contamination.RData")
 load("ProcessedData/TTseq/expressed.TR.5.50.RData")
 load("ProcessedData/TTseq/protein.coding.RData")
 
+#size.factors.cerevisiae calculation can be found in https://github.com/cramerlab/mNET-seq_analysis/
 load("ProcessedData/mNETseq/size.factors.cerevisiae.RData")
 
 load("ProcessedData/TTseq/conversion.factor.to.amount.per.cell.RData")
