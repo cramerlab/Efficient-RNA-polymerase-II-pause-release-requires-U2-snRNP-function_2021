@@ -29,7 +29,7 @@ R_scripts/exon_based_spliced_junction.R
 R_scripts/splicing_ratio.R
 
 #### Splicing-affected and unaffected transcripts identification:
-R_scripts/spicing_affected_unaffected.R
+R_scripts/splicing_affected_unaffected.R
 
 #### Elongation velocity calculation:
 1) Create Unique Transcribed Bases Rle Tracks for TT-seq and Fragment End Rle Tracks for mNET-seq: 
