@@ -15,7 +15,7 @@ for (bam.file in bam.files){
 
   for (index.subset in names(index.subsets)){
     load(file.path("ProcessedData","TTseq","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",unlist(strsplit(index.subset,split = "_"))[2],".RData")))
-    strand.chr.coverage.from.bam = caizzi.cramer.2019.TTseq.K562.PlaB.unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
+    strand.chr.coverage.from.bam = unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
     strand.chr.human.refseq.major.isoform.exon = human.refseq.major.isoform.exon[index.subsets[[index.subset]],c("start","end","length")]
 
     registerDoParallel(cores = mc.cores)
@@ -43,7 +43,7 @@ for (bam.file in bam.files){
 
   for (index.subset in names(index.subsets)){
     load(file.path("ProcessedData","TTseq","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",unlist(strsplit(index.subset,split = "_"))[2],".RData")))
-    strand.chr.coverage.from.bam = caizzi.cramer.2019.TTseq.K562.PlaB.unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
+    strand.chr.coverage.from.bam = unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
     strand.chr.human.refseq.major.isoform.exon = human.refseq.major.isoform.exon[index.subsets[[index.subset]],c("start","end","length")]
 
     registerDoParallel(cores = mc.cores)
@@ -83,7 +83,7 @@ for (bam.file in bam.files){
   
   for (index.subset in names(index.subsets)){
     load(file.path("ProcessedData","TTseq","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",unlist(strsplit(index.subset,split = "_"))[2],".RData")))    
-    strand.chr.coverage.from.bam = caizzi.cramer.2019.TTseq.K562.PlaB.unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
+    strand.chr.coverage.from.bam = unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
     strand.chr.human.refseq.major.isoform.intron = human.refseq.major.isoform.intron[index.subsets[[index.subset]],c("start","end","length")]
     
     registerDoParallel(cores = mc.cores)
@@ -112,7 +112,7 @@ for (bam.file in bam.files){
   for (index.subset in names(index.subsets)){
     load(load(file.path("ProcessedData","TTseq","UniqueTranscribedBasesCoverageRleTracks","bam.file",paste0("unique.transcribed.bases.coverage.track.list.",unlist(strsplit(index.subset,split = "_"))[2],".RData")))
     
-    strand.chr.coverage.from.bam = caizzi.cramer.2019.TTseq.K562.PlaB.unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
+    strand.chr.coverage.from.bam = unique.paired.non.spliced.fragment.coverage.track.list.chr[[unlist(strsplit(index.subset,split = "_"))[1]]]
     strand.chr.human.refseq.major.isoform.intron = human.refseq.major.isoform.intron[index.subsets[[index.subset]],c("start","end","length")]
     
     registerDoParallel(cores = mc.cores)
