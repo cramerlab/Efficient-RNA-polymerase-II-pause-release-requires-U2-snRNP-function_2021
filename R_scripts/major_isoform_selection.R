@@ -37,19 +37,7 @@ Quant=cbind(Quant, "mean_DMSO"= rowMeans(Quant[,c("DMSO1h_1", "DMSO1h_2")]))
 Quant=cbind(Quant, "mean_all"= rowMeans(Quant))
 
 #Load refseq annotation file
-load("human.refseq.anno.April19.RData")
-                  
-#Remove the version number, because I dont have it on the biomart anno
-rownames(Quant)=sub('\\..*', '', rownames(Quant))
-human.refseq.anno$transcript_id=sub('\\..*', '', human.refseq.anno$transcript_id)
-
-                 
-                  
-load("ensembl.biomart.refseq.2.ensembl.gene.id.mapping.RData")
-
-
-human.refseq.anno[,"gene_name"]=ensembl.biomart.refseq.2.ensembl.gene.id.mapping[human.refseq.anno[,"transcript_id"]]
-
+load("human.refseq.ann.RData")
                   
 refseq_salmon=human.refseq.anno[,c("gene_name", "transcript_id")]
 transcripts = rownames(Quant) 
