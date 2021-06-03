@@ -157,7 +157,7 @@ export(human.refseq.major.TR,con = "Annotation/human.refseq.major.TR.gtf")
 #Exons anno
 human.refseq.anno.exon = human.refseq.extended[which(human.refseq.extended[,"type"] == "exon"),]
 human.refseq.anno.exon$transcript_id=sub('\\..*', '', human.refseq.anno.exon$transcript_id)
-human.refseq.major.isoform.exon = human.refseq.anno.exon[which(human.refseq.anno.exon[,"transcript_id"] %in% ALL),]
+human.refseq.major.isoform.exon = human.refseq.anno.exon[which(human.refseq.anno.exon[,"transcript_id"] %in% human.refseq.major.TR$transcript_id),]
 human.refseq.major.isoform.exon=human.refseq.major.isoform.exon[,c("chr", "strand", "type", "start", "end", "transcript_id", "id","length","exon_order"),]
 
 save(human.refseq.major.isoform.exon, file= "Annotation/human.refseq.major.isoform.exon.RData")
@@ -166,7 +166,7 @@ export(human.refseq.major.isoform.exon,con = "Annotation/human.refseq.major.isof
 #Introns anno
 human.refseq.anno.intron = human.refseq.extended[which(human.refseq.extended[,"type"] == "intron"),]
 human.refseq.anno.intron$transcript_id=sub('\\..*', '', human.refseq.anno.intron$transcript_id)
-human.refseq.major.isoform.intron = human.refseq.anno.intron[which(human.refseq.anno.intron[,"transcript_id"] %in% ALL),]
+human.refseq.major.isoform.intron = human.refseq.anno.intron[which(human.refseq.anno.intron[,"transcript_id"] %in% human.refseq.major.TR$transcript_id),]
 human.refseq.major.isoform.intron=human.refseq.major.isoform.intron[,c("chr", "strand", "type", "start", "end", "transcript_id", "id","length","intron_order"),]
 
 save(human.refseq.major.isoform.intron, file= "Annotation/human.refseq.major.isoform.intron.RData")
